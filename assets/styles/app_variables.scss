@@ -1,87 +1,15 @@
+@import 'fonts';
+
 // colors
-$highlight-orange: #fdebc0;
-$main-orange: #d1a05a;
 $white: #ffffff;
-$light-gray: #f4f4f1;
-$main-darkblue: #171a23;
-$yellow-main: #fdebc0;
-$yellow: #fbdd92;
-$grey-main: #ebebeb;
-$grey: #777777;
-$grey-secondary: #707070;
-$black: #000000;
-$beige: #d1a05a66;
-$light-beige: #f9f9f5;
-$red: #de0909;
-$red-light: #f54242;
-$secondary-orange: #FF6B00;
-$yellow-secondary: #FFC700;
-$grey-tertiary: #F0F2F3;
-$green-light: #118644;
-$yellow-sand: #FFD460;
-$orange-grace: #F8B069;
-$background-partners: #212121;
-$font-gray-partners: #c0c0c0;
-$background-yellow-partners: #f9c92c;
-$background-partner-card: #303030;
-$red-warning: #FF0000;
-$background-tag: #D1A05A80;
-$grey-gradient-start: #F0F0F0;
-$grey-gradient-end: #D3D3D3;
-$grey-circle: #E1E1E2;
+$main-color: #262b22;
+$color-grey: #eff2f8;
+$grey-main: #828ba2;
+$color-blue: #1a91f1;
+$color-green: #005555;
 
 // breakpoints
-$ex-sm: 400px;
 $sm: 576px;
 $md: 768px;
 $lg: 992px;
 $xl: 1200px;
-$xl-large: 1290px;
-$xl-static: 1336px;
-
-// wrapper sizes
-$max-wrapper: 1260px;
-$min-wrapper: 320px;
-
-// data color
-$color-light: #fff;
-$color-primary: #d1a05a;
-$color-dark: #171a23;
-$color-danger: red;
-$color-success: green;
-$color-warning: orange;
-$color-disabled: gray;
-
-$color-primary-light: #e3bd71;
-
-// background
-$background-main: $color-light;
-$background-light: $color-primary;
-$background-dark: $color-dark;
-
-// border
-$border-color: $color-light;
-$border-radius: 10px;
-
-$box-shadow: 0 0 7px 0 #00000040;
-
-// color
-$color-body: #161923;
-$color-title: $color-dark;
-$color-body-light: #777;
-
-// btn
-$btn-radius: 36px;
-$btn-white: $color-light;
-$btn-primary: $color-primary;
-$btn-danger: $color-danger;
-$btn-success: $color-success;
-$btn-warning: $color-warning;
-$btn-disabled: $color-disabled;
-
-// icon
-$icon-dark: $color-dark;
-
-// promo colors
-$promo-bg-button: #FF8080;
-$promo-color: #2B1C1C;

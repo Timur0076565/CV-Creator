@@ -2,54 +2,53 @@
   <div class="employment-history-part">
     <h2>Employment History</h2>
 
-    <EmploymentHistoryForm
-      v-for="(form, formIndex) in empForms"
+    <DynamicForm
+      v-for="(form, formIndex) in formData"
       :key="formIndex"
       :formData="form"
+      :titles="titles"
     />
 
-    <AddButton @click="addNewForm">
+    <AddButton @click="addNewForm" type="button">
       Add one more employment
     </AddButton>
   </div>
 </template>
 
 <script>
-import EmploymentHistoryForm from "~/components/pageParts/employmentHistoryParts/EmploymentHistoryForm";
+import DynamicForm from "~/components/pageParts/DynamicForm";
 import AddButton from "~/components/base/AddButton";
 
 export default {
   name: "EmploymentHistoryPart",
-  components: {AddButton, EmploymentHistoryForm},
+  components: {AddButton, DynamicForm},
+  props: {
+    formData: {
+      type: Array,
+      required: true,
+    }
+  },
   data() {
     return {
-      empForms: [
-        {
-          jobTitle: '',
-          employer: '',
-          date: '',
-          description: '',
-        }
-      ]
+      titles: {
+        jobTitle: 'Job Title',
+        employer: 'Employer',
+        date: 'Start & End Date',
+        city: 'City',
+        description: 'Description',
+      }
     }
   },
   methods: {
     addNewForm() {
-      const newForm = {
-        jobTitle: '',
-        employer: '',
-        date: '',
-        description: '',
-      }
-
-      this.empForms.push(newForm)
+      this.$emit('onAddNewForm')
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../../../assets/styles/app_variables';
+@import '../../assets/styles/app_variables';
 
 .employment-history-part {
   margin-bottom: 30px;

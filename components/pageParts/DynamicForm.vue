@@ -5,61 +5,77 @@
     <div class="inputs_wrapper">
       <BaseInput
         class="base-input"
-        v-model="formData.jobTitle"
+        v-model="formData[titlesList[0][0]]"
       >
-        Job Title
+        {{ titlesList[0][1] }}
       </BaseInput>
 
-      <BaseInput class="base-input">
-        Employer
+      <BaseInput
+        class="base-input"
+        v-model="formData[titlesList[1][0]]"
+      >
+        {{ titlesList[1][1] }}
       </BaseInput>
     </div>
 
     <div class="inputs_wrapper">
-      <BaseInput class="base-input">
-        Start & End Date
+      <BaseInput
+        class="base-input"
+        v-model="formData[titlesList[2][0]]"
+      >
+        {{ titlesList[2][1] }}
       </BaseInput>
 
-      <BaseInput class="base-input">
-        City
+      <BaseInput
+        class="base-input"
+        v-model="formData[titlesList[3][0]]"
+      >
+        {{ titlesList[3][1] }}
       </BaseInput>
     </div>
 
-    <BaseTextArea>
-      Description
+    <BaseTextArea v-model="formData[titlesList[4][0]]">
+      {{ titlesList[4][1] }}
     </BaseTextArea>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import BaseInput from "~/components/base/BaseInput";
 import BaseTextArea from "~/components/base/BaseTextArea";
 import {firstChartToUpperCase} from "~/helpers/helpers";
 
 export default {
-  name: "EmploymentHistoryForm",
+  name: "DynamicForm",
   components: {BaseTextArea, BaseInput},
   props: {
     formData: {
       type: Object,
       required: true
-    }
+    },
+    titles: {
+      type: Object,
+      required: true
+    },
   },
   computed: {
-    title() {
-      return firstChartToUpperCase(this.formData.jobTitle) || '(Job title)'
+    title(): string {
+      return firstChartToUpperCase(this.formData[this.titlesList[0][0]]) || '(Job title)'
     },
+    titlesList(): any {
+      return Object.entries(this.titles)
+    }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../../../assets/styles/app_variables';
+@import '../../assets/styles/app_variables';
 
 .employment-history-form {
   border: 1px solid rgba($grey-main, .2);
   padding: 0 20px 20px;
-  border-radius: 4px;
+  border-radius: 8px;
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
