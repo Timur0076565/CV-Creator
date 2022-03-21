@@ -3,6 +3,9 @@
     class="base-button"
     v-bind="$attrs"
     v-on="$listeners"
+    :disabled="disabled"
+    :class="{disabled}"
+    type="button"
   >
     <slot />
   </button>
@@ -10,7 +13,13 @@
 
 <script>
 export default {
-  name: "BaseButton"
+  name: "BaseButton",
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  }
 }
 </script>
 
@@ -34,6 +43,12 @@ export default {
   padding: 12px;
   outline: none;
   border: none;
+
+  &.disabled {
+    opacity: .5;
+    border: none;
+    pointer-events: none;
+  }
 }
 
 </style>

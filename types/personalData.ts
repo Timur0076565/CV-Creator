@@ -1,12 +1,30 @@
+export interface IDetails {
+  avatar: string
+  jobTitle: string
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+}
+
+export interface IEducation {
+  school: string
+  degree: string
+  date: string
+  city: string
+  description: string
+}
+
+export interface IEmploymentHistory {
+  jobTitle: string
+  employer: string
+  date: string
+  city: string
+  description: string
+}
+
 export default interface IPersonalData {
-  details: {
-    avatar: string
-    jobTitle: string
-    firstName: string
-    lastName: string
-    email: string
-    phone: string
-  },
+  details: IDetails,
   links: {
     name: string,
     href: string
@@ -16,18 +34,6 @@ export default interface IPersonalData {
     level: string
   }[],
   profile: string
-  employmentHistory: {
-    jobTitle: string
-    employer: string
-    date: string
-    city: string
-    description: string
-  }[],
-  education: {
-    school: string
-    degree: string
-    date: string
-    city: string
-    description: string
-  }[],
+  employmentHistory: IEmploymentHistory[],
+  education: IEducation[],
 }

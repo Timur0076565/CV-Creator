@@ -17,32 +17,39 @@
       v-for="(skill, index) in skills"
       class="skill-item"
       :key="index"
-      v-model="skill.name"
       :skill="skill"
       @onChangeLevel="(level) => changeLevel(index, level)"
     />
+
+    <AddButton @click="createNewSkill">
+      Add one more skill
+    </AddButton>
   </div>
 </template>
 
 <script lang="ts">
-import BaseTag from "~/components/base/BaseTag";
+import BaseTag from "~/components/base/BaseTag.vue";
 import SkillItem from "~/components/pageParts/SkillItem.vue";
+import ISkills from "~/types/skills";
+import AddButton from "~/components/base/AddButton.vue";
 
-type Skill = {
-  name: string
-  level: string
+type IData = {
+  skillsVariants: {
+    name: string
+    level: string
+  }[]
 }
 
 export default {
   name: "SkillsPart",
-  components: {SkillItem, BaseTag},
+  components: {AddButton, SkillItem, BaseTag},
   props: {
     skills: {
       type: Array,
       default: () => []
     }
   },
-  data() {
+  data(): IData {
     return {
       skillsVariants: [
         {
@@ -97,11 +104,31 @@ export default {
     }
   },
   methods: {
-    addSkill(skill: Skill): void {
+    addSkill(skill: ISkills): void {
       this.$emit('onAddSkill', skill)
     },
     changeLevel(index: number, level: string): void {
       this.$emit('onChangeSkill', index, level)
+    },
+    createNewSkill(): void {
+      // const hasTheSameProperty = this.skillsVariants.some(item => item.name === skill)
+      //
+      // if (hasTheSameProperty) {
+      //   return
+      // }
+      //
+      // const newSkill: ISkills = {
+      //   name: skill,
+      //   level: '1'
+      // }
+      //
+      // this.skillsVariants.push(newSkill)
+      const newSkill: ISkills = {
+        name: '',
+        level: '1',
+      }
+
+      this.$emit('onAddSkill', newSkill)
     }
   }
 }

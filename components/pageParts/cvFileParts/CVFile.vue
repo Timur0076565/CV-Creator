@@ -1,79 +1,82 @@
 <template>
   <div class="cv-file">
     <div class="details" :class="backgroundColor">
-      <div class="person-data">
-        <img
-          class="avatar"
-          :src="personData.details.avatar"
-          alt="Avatar"
-        >
+      <PersonData
+        :details="personData.details"
+      />
 
-        <h2 class="title">{{ name }}</h2>
+      <DetailsList
+        :details="personData.details"
+      />
 
-        <div class="job"> {{ personData.details.jobTitle }} </div>
-      </div>
+      <LinksList
+        v-if="personData.links.length"
+        :links="personData.links"
+      />
 
-      <div class="details-title">details</div>
-      <div class="phone">{{ personData.details.phone }}</div>
-      <div class="email">{{ personData.details.email }}</div>
-
-      <div class="details-title">links</div>
-
-      <ul class="list">
-        <li v-for="(link, index) in personData.links" :key="index">
-          <a class="link" :href="link.href">{{link.name}}</a>
-        </li>
-      </ul>
-
-      <div class="details-title">skills</div>
-      <ul class="list">
-        <li
-          v-for="(skill, index) in personData.skills"
-          class="skill"
-          :key="index"
-        >
-          <span>{{ skill.name }}</span>
-          <span class="level" :style="{ width: `${skill.level * 20}%` }"/>
-        </li>
-      </ul>
+      <SkillsList
+        v-if="personData.skills.length"
+        :skills="personData.skills"
+      />
     </div>
 
     <div class="main-info">
-      <div class="main-info-title">Profile</div>
-      <div class="profile">{{personData.profile}}</div>
-
-      <div class="main-info-title">Employment History</div>
-      <CVInfoBlock
-        v-for="emp in personData.employmentHistory"
-        class="info-block"
-      >
-        <template #info>
-          {{ info(emp.jobTitle, emp.employer, emp.city) }}
+      <MainInfoWrapper v-if="personData.profile">
+        <template #title>
+          Profile
         </template>
-        <template #date>{{ emp.date }}</template>
-        <template #description>{{ emp.description }}</template>
-      </CVInfoBlock>
 
-      <div class="main-info-title">Education</div>
-      <CVInfoBlock
-        v-for="emp in personData.education"
-        class="info-block"
-      >
-        <template #info>
-          {{ info(emp.degree, emp.school, emp.city) }}
+        <div class="profile">{{personData.profile}}</div>
+      </MainInfoWrapper>
+
+      <MainInfoWrapper v-if="personData.employmentHistory.length">
+        <template #title>
+          Employment History
         </template>
-        <template #date>{{ emp.date }}</template>
-        <template #description>{{ emp.description }}</template>
-      </CVInfoBlock>
+
+        <CVInfoBlock
+          v-for="emp in personData.employmentHistory"
+          class="info-block"
+        >
+          <template #info>
+            {{ info(emp.jobTitle, emp.employer, emp.city) }}
+          </template>
+          <template #date>{{ emp.date }}</template>
+          <template #description>{{ emp.description }}</template>
+        </CVInfoBlock>
+      </MainInfoWrapper>
+
+      <MainInfoWrapper v-if="personData.education.length">
+        <template #title>
+          Education
+        </template>
+
+        <CVInfoBlock
+          v-for="emp in personData.education"
+          class="info-block"
+        >
+          <template #info>
+            {{ info(emp.degree, emp.school, emp.city) }}
+          </template>
+          <template #date>{{ emp.date }}</template>
+          <template #description>{{ emp.description }}</template>
+        </CVInfoBlock>
+      </MainInfoWrapper>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import CVInfoBlock from "~/components/pageParts/cvFileParts/CVInfoBlock.vue";
+import SkillsList from "~/components/pageParts/cvFileParts/SkillsList.vue";
+import LinksList from "~/components/pageParts/cvFileParts/LinksList.vue";
+import DetailsList from "~/components/pageParts/cvFileParts/DetailsList.vue";
+import PersonData from "~/components/pageParts/cvFileParts/PersonData.vue";
+import MainInfoWrapper from "~/components/pageParts/cvFileParts/MainInfoWrapper.vue";
+
 export default {
   name: "CVFile",
-  components: {CVInfoBlock},
+  components: {MainInfoWrapper, PersonData, DetailsList, LinksList, SkillsList, CVInfoBlock},
   props: {
     personData: {
       type: Object,
@@ -85,9 +88,6 @@ export default {
     }
   },
   computed: {
-    name(): string {
-      return `${this.personData.details.firstName}, ${this.personData.details.lastName}`
-    },
     info(): Function {
       return (firstPart: string, secondPart: string, city: string): string => {
         return `${firstPart}, ${secondPart}, ${city}`
@@ -114,6 +114,11 @@ export default {
 .cv-file {
   display: flex;
   overflow: hidden;
+  //height: 877px;
+  //max-width: 620px;
+  height: 842px;
+  max-width: 600px;
+  margin: 0 auto;
 
   .details {
     padding: 30px;
@@ -135,81 +140,12 @@ export default {
     &.blue {
       background-color: $color-blue;
     }
-
-    .person-data {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 15px;
-
-      .avatar {
-        width: 90px;
-        height: 90px;
-        border-radius: 50%;
-      }
-
-      .title {
-        margin: 0;
-      }
-
-      .job {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        &:before {
-          content: '----------------';
-        }
-      }
-    }
-
-    .details-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .email,
-    .list {
-      margin: 0 0 20px;
-      padding: 0;
-      list-style: none;
-
-      a {
-        color: $white;
-      }
-
-      .skill {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 10px;
-        font-size: 14px;
-
-        .level {
-          height: 4px;
-          background-color: $white;
-          border-radius: 2px;
-          margin-top: 3px;
-        }
-      }
-    }
   }
 
   .main-info {
     padding: 30px;
     background-color: $color-grey;
     flex-basis: 70%;
-
-    .main-info-title {
-      font-size: 22px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .profile,
-    .info-block {
-      margin-bottom: 20px;
-    }
   }
 }
 

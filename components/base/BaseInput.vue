@@ -19,7 +19,7 @@
   </FieldWrapper>
 </template>
 
-<script>
+<script lang="ts">
 import FieldWrapper from "~/components/base/FieldWrapper";
 
 export default {

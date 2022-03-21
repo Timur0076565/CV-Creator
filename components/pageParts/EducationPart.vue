@@ -9,7 +9,7 @@
       :titles="titles"
     />
 
-    <AddButton @click="addNewForm" type="button">
+    <AddButton @click="addNewForm">
       Add one more education
     </AddButton>
   </div>

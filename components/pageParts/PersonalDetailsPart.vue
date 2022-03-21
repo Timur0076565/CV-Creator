@@ -1,6 +1,6 @@
 <template>
-  <div class="personal-details-part">
-    <h2>Personal Details</h2>
+  <div class="personal-details-part" :class="{'bg-error': bgError}">
+    <h2>Personal Details<span class="required">*</span></h2>
 
     <div class="inputs_wrapper">
       <BaseInput class="base-input" v-model="formData.jobTitle">
@@ -43,6 +43,10 @@ export default {
     formData: {
       type: Object,
       required: true,
+    },
+    bgError: {
+      type: Boolean,
+      default: false,
     }
   },
 }
@@ -52,6 +56,27 @@ export default {
 
 .personal-details-part {
   margin-bottom: 30px;
+
+  &.bg-error {
+    position: relative;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      background-color: rgba(red, 0.3);
+      border-radius: 8px;
+      z-index: -1;
+    }
+  }
+
+  .required {
+    color: red;
+  }
 
   .inputs_wrapper {
     display: flex;

@@ -22,7 +22,7 @@
       ></CVFile>
 
       <BaseButton class="base-button" @click="exportPDF">
-        exportPDF
+        Export PDF
       </BaseButton>
     </div>
 
@@ -31,7 +31,17 @@
       class="form"
       @submit.prevent="onSubmit"
     >
-      <PersonalDetailsPart :formData="personData.details"/>
+      <PersonalDetailsPart
+        :formData="personData.details"
+        :bgError="showWarning && isInvalidForm"
+      />
+
+      <div
+        v-if="showWarning && isInvalidForm"
+        class="error"
+      >
+        Personal details is required
+      </div>
 
       <PersonalInfoParts v-model="personData.profile"/>
 
@@ -65,22 +75,35 @@ import PersonalInfoParts from "~/components/pageParts/PersonalInfoParts.vue";
 import EmploymentHistoryPart from "~/components/pageParts/EmploymentHistoryPart.vue";
 import CVFile from "~/components/pageParts/cvFileParts/CVFile.vue";
 import BaseButton from "~/components/base/BaseButton.vue";
-import IPersonalData from "~/types/personalData";
+import IPersonalData, {IEducation, IEmploymentHistory} from "~/types/personalData";
 import EducationPart from "~/components/pageParts/EducationPart.vue";
 import SkillsPart from "~/components/pageParts/SkillsPart.vue";
 import LinksPart from "~/components/pageParts/LinksPart.vue";
 import LevelRadioButton from "~/components/base/LevelRadioButton.vue";
 
-@Component
+type IData = {
+  selectedTheme: string,
+  themes: Array<string>,
+  personData: IPersonalData,
+  showPDFFile: boolean,
+  showWarning: boolean
+}
 
+@Component
 export default Vue.extend({
   name: 'IndexPage',
   components: {
     LevelRadioButton,
     LinksPart,
     SkillsPart,
-    EducationPart, BaseButton, CVFile, EmploymentHistoryPart, PersonalInfoParts, PersonalDetailsPart},
-  data() {
+    EducationPart,
+    BaseButton,
+    CVFile,
+    EmploymentHistoryPart,
+    PersonalInfoParts,
+    PersonalDetailsPart
+  },
+  data(): IData {
     return {
       selectedTheme: 'green',
       themes: [
@@ -104,13 +127,22 @@ export default Vue.extend({
         profile: '',
         employmentHistory: [],
         education: [],
-      } as IPersonalData,
-      showPDFFile: false as boolean,
+      },
+      showPDFFile: false,
+      showWarning: false,
     }
   },
+  beforeMount() {
+    this.saveDataFromLocalStirage()
+  },
+  computed: {
+    isInvalidForm() {
+      return ['', null, undefined].some((nullified) => Object.values(this.personData.details).includes(nullified));
+    },
+  },
   methods: {
-    addNewEducationPartForm(): void {
-      const newForm: any = {
+    addNewEducationPartForm() {
+      const newForm: IEducation = {
         school: '',
         degree: '',
         date: '',
@@ -120,8 +152,8 @@ export default Vue.extend({
 
       this.personData.education.push(newForm)
     },
-    addNewEmploymentHistoryForm(): void {
-      const newForm: any = {
+    addNewEmploymentHistoryForm() {
+      const newForm: IEmploymentHistory = {
         jobTitle: '',
         employer: '',
         date: '',
@@ -131,7 +163,7 @@ export default Vue.extend({
 
       this.personData.employmentHistory.push(newForm)
     },
-    addNewForm(): void {
+    addNewForm() {
       const newForm: any = {
         name: '',
         href: '',
@@ -139,16 +171,23 @@ export default Vue.extend({
 
       this.personData.links.push(newForm)
     },
-    addSkill(skill: any): void {
+    addSkill(skill: any) {
       this.personData.skills.push(skill)
     },
-    changeSkill(index: number, level: string): void {
+    changeSkill(index: number, level: string) {
       this.personData.skills[index].level = level
     },
-    onSubmit(): void {
+    onSubmit() {
+      if (this.isInvalidForm) {
+        this.showWarning = true
+        return
+      }
+
       this.showPDFFile = true;
+
+      localStorage.setItem('form-data', JSON.stringify(this.personData))
     },
-    exportPDF(): void {
+    exportPDF() {
       const doc = new jsPDF('p', 'pt', 'A4');
       const source: any = window.document.querySelector('.cv-file')
       const { details } = this.personData
@@ -158,6 +197,11 @@ export default Vue.extend({
           doc.save(`${details.firstName} ${details.lastName}.pdf`);
         }
       });
+    },
+    saveDataFromLocalStirage() {
+      if (localStorage.getItem('form-data')) {
+        this.personData = JSON.parse(localStorage.getItem('form-data'))
+      }
     }
   }
 })
@@ -173,6 +217,11 @@ export default Vue.extend({
 
   .themes {
     display: flex;
+  }
+
+  .error {
+    color: red;
+    text-align: center;
   }
 
   .title {

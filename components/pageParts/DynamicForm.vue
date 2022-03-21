@@ -60,7 +60,7 @@ export default {
   },
   computed: {
     title(): string {
-      return firstChartToUpperCase(this.formData[this.titlesList[0][0]]) || '(Job title)'
+      return firstChartToUpperCase(this.formData[this.titlesList[0][0]]) || `(${this.titlesList[0][1]})`
     },
     titlesList(): any {
       return Object.entries(this.titles)

@@ -1,14 +1,14 @@
 <template>
   <div class="cv-info_block">
-    <div class="info_block-title">
+    <div class="title">
       <slot name="info"/>
     </div>
 
-    <div class="info_block-date">
+    <div class="date">
       <slot name="date"/>
     </div>
 
-    <div class="info_block-description">
+    <div class="description">
       <slot name="description"/>
     </div>
   </div>
@@ -20,6 +20,20 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+.cv-info_block {
+  .title {
+    font-weight: bold;
+  }
+
+  .date {
+    opacity: .8;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    margin: 2px 0;
+  }
+}
 
 </style>

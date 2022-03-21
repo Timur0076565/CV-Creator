@@ -8,7 +8,7 @@
       :formData="form"
     />
 
-    <AddButton @click="addNewForm" type="button">
+    <AddButton @click="addNewForm">
       Add one more link
     </AddButton>
   </div>

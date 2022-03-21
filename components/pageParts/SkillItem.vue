@@ -2,8 +2,7 @@
   <div class="skill-item">
     <BaseInput
       class="base-input"
-      v-bind="$attrs"
-      v-on="$listeners"
+      v-model="skill.name"
     >
       Skill
     </BaseInput>
@@ -16,6 +15,7 @@
 import BaseInput from "~/components/base/BaseInput.vue";
 import LevelRadioButton from "~/components/base/LevelRadioButton.vue";
 import SkillLevel from "~/components/pageParts/SkillLevel.vue";
+
 export default {
   name: "SkillItem",
   components: {SkillLevel, LevelRadioButton, BaseInput},
