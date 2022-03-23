@@ -21,9 +21,15 @@
         :theme="selectedTheme"
       ></CVFile>
 
-      <BaseButton class="base-button" @click="exportPDF">
-        Export PDF
-      </BaseButton>
+      <div class="buttons_wrapper">
+        <BaseButton class="base-button" @click="createNewCV" variant="grey">
+          Create new CV
+        </BaseButton>
+
+        <BaseButton class="base-button" @click="exportPDF">
+          Export PDF
+        </BaseButton>
+      </div>
     </div>
 
     <form
@@ -85,7 +91,7 @@ type IData = {
   selectedTheme: string,
   themes: Array<string>,
   personData: IPersonalData,
-  showPDFFile: boolean,
+  showPDFFile: boolean
   showWarning: boolean
 }
 
@@ -128,12 +134,12 @@ export default Vue.extend({
         employmentHistory: [],
         education: [],
       },
-      showPDFFile: false,
+      showPDFFile: Boolean(localStorage.getItem('form-data')),
       showWarning: false,
     }
   },
   beforeMount() {
-    this.saveDataFromLocalStirage()
+    this.saveDataFromLocalStorage()
   },
   computed: {
     isInvalidForm() {
@@ -183,7 +189,7 @@ export default Vue.extend({
         return
       }
 
-      this.showPDFFile = true;
+      this.showPDFFile = true
 
       localStorage.setItem('form-data', JSON.stringify(this.personData))
     },
@@ -198,10 +204,14 @@ export default Vue.extend({
         }
       });
     },
-    saveDataFromLocalStirage() {
+    saveDataFromLocalStorage() {
       if (localStorage.getItem('form-data')) {
         this.personData = JSON.parse(localStorage.getItem('form-data'))
       }
+    },
+    createNewCV() {
+      this.showPDFFile = false
+      localStorage.removeItem('form-data')
     }
   }
 })
@@ -213,10 +223,28 @@ export default Vue.extend({
 .cv-creator {
   margin: 30px auto;
   max-width: $md;
-  font-family: 'Karla';
+  font-family: 'Karla', sans-serif;
 
   .themes {
     display: flex;
+  }
+
+  .cv-file_wrapper {
+    .buttons_wrapper {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+
+      .base-button {
+        max-width: 200px;
+        margin: 0;
+
+        &:first-of-type {
+          margin-right: 15px;
+        }
+      }
+    }
   }
 
   .error {

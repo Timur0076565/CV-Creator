@@ -17,7 +17,7 @@ export default {
   name: "PersonData",
   props: {
     details: {
-      type: Array,
+      type: Object,
       default: () => ({})
     }
   },

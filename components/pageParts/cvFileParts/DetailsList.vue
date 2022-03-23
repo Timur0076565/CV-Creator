@@ -11,7 +11,7 @@ export default {
   name: "DetailsList",
   props: {
     details: {
-      type: Array,
+      type: Object,
       default: () => ({})
     }
   }
