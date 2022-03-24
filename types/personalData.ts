@@ -23,16 +23,20 @@ export interface IEmploymentHistory {
   description: string
 }
 
+export interface ILinks {
+  name: string,
+  href: string
+}
+
+export interface ISkills {
+  name: string,
+  href: string
+}
+
 export default interface IPersonalData {
   details: IDetails,
-  links: {
-    name: string,
-    href: string
-  }[],
-  skills: {
-    name: string,
-    level: string
-  }[],
+  links: ILinks[],
+  skills: ISkills[],
   profile: string
   employmentHistory: IEmploymentHistory[],
   education: IEducation[],

@@ -32,6 +32,7 @@ import BaseTag from "~/components/base/BaseTag.vue";
 import SkillItem from "~/components/pageParts/SkillItem.vue";
 import ISkills from "~/types/skills";
 import AddButton from "~/components/base/AddButton.vue";
+import Vue from "vue";
 
 type IData = {
   skillsVariants: {
@@ -40,7 +41,7 @@ type IData = {
   }[]
 }
 
-export default {
+export default Vue.extend({
   name: "SkillsPart",
   components: {AddButton, SkillItem, BaseTag},
   props: {
@@ -131,7 +132,7 @@ export default {
       this.$emit('onAddSkill', newSkill)
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

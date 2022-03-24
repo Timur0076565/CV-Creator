@@ -76,7 +76,7 @@ import MainInfoWrapper from "~/components/pageParts/previewParts/MainInfoWrapper
 import { COLORS } from "~/assets/consts/colors";
 
 export default {
-  name: "CVFile",
+  name: "SideBarLeftResume",
   components: {MainInfoWrapper, PersonData, DetailsList, LinksList, SkillsList, CVInfoBlock},
   props: {
     personData: {
@@ -106,7 +106,6 @@ export default {
 
 .cv-file {
   display: flex;
-  overflow: hidden;
   width: 100%;
   height: 842px;
   max-width: 600px;
@@ -116,6 +115,7 @@ export default {
     padding: 30px;
     color: $white;
     flex-basis: 30%;
+    width: 30%;
 
     &.red {
       background-color:  $color-red;
@@ -147,6 +147,7 @@ export default {
     padding: 30px;
     background-color: $color-grey;
     flex-basis: 70%;
+    width: 70%;
   }
 }
 

@@ -1,7 +1,7 @@
 <template>
   <FieldWrapper class="skill-level">
     <template #label>
-      {{ label }}
+      <span :class="label">{{ labelLevel }}</span>
     </template>
 
     <template #field>
@@ -19,23 +19,69 @@
 </template>
 
 <script lang="ts">
-import LevelRadioButton from "~/components/base/LevelRadioButton";
-import FieldWrapper from "~/components/base/FieldWrapper.vue";
+// import LevelRadioButton from "~/components/base/LevelRadioButton";
+// import FieldWrapper from "~/components/base/FieldWrapper.vue";
+// import {firstChartToUpperCase} from "~/helpers/helpers";
+//
+// const labels = {
+//   '1': 'novice',
+//   '2': 'beginner',
+//   '3': 'skillful',
+//   '4': 'experienced',
+//   '5': 'expert',
+// }
+// export default {
+//   name: "SkillLevel",
+//   components: {FieldWrapper, LevelRadioButton},
+//   props: {
+//     level: {
+//       type: String,
+//       default: '1',
+//     }
+//   },
+//   data() {
+//     return {
+//       activeLevel: this.level,
+//       levels: ['1','2','3','4','5']
+//     }
+//   },
+//   computed: {
+//     label(): string {
+//       return labels[this.activeLevel]
+//     },
+//     labelLevel() {
+//       return firstChartToUpperCase(this.label)
+//     }
+//   },
+//   methods: {
+//     changeLevel(level: string): void {
+//       this.$emit('onChangeLevel', level)
+//     }
+//   }
+// }
 
-const labels = {
-  '1': 'Novice',
-  '2': 'Beginner',
-  '3': 'Skillful',
-  '4': 'Experienced',
-  '5': 'Expert',
+import DefineComponent from 'vue'
+import LevelRadioButton from "~/components/base/LevelRadioButton.vue";
+import FieldWrapper from "~/components/base/FieldWrapper.vue";
+import {firstChartToUpperCase} from "~/helpers/helpers";
+
+import Vue from 'vue';
+
+const labels: any = {
+  '1': 'novice',
+  '2': 'beginner',
+  '3': 'skillful',
+  '4': 'experienced',
+  '5': 'expert',
 }
-export default {
+
+export default Vue.extend({
   name: "SkillLevel",
   components: {FieldWrapper, LevelRadioButton},
   props: {
     level: {
       type: String,
-      default: '1',
+      default: '1'
     }
   },
   data() {
@@ -47,6 +93,9 @@ export default {
   computed: {
     label(): string {
       return labels[this.activeLevel]
+    },
+    labelLevel(): string {
+      return firstChartToUpperCase(this.label)
     }
   },
   methods: {
@@ -54,7 +103,7 @@ export default {
       this.$emit('onChangeLevel', level)
     }
   }
-}
+})
 </script>
 
 
@@ -65,6 +114,22 @@ export default {
   .levels {
     display: flex;
     align-items: center;
+  }
+
+  .novice {
+    color: $color-red;
+  }
+  .beginner {
+    color: $color-orange;
+  }
+  .skillful {
+    color: $color-yellow;
+  }
+  .experienced {
+    color: $color-green;
+  }
+  .expert {
+    color: $color-blue;
   }
 }
 

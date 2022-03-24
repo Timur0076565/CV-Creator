@@ -7,6 +7,7 @@
       :value="value"
       type="radio"
     >
+
     <div
       class="fake"
       :class="currentColor"
@@ -90,16 +91,16 @@ export default {
 
   .input:checked + .fake {
     &.red {
-      background-color: rgba(red, .5);
+      background-color: rgba($color-red, .5);
     }
     &.orange {
-      background-color: rgba(orange, .5);
+      background-color: rgba($color-orange, .5);
     }
     &.yellow {
-      background-color: rgba(yellow, .5);
+      background-color: rgba($color-yellow, .5);
     }
     &.green {
-      background-color: rgba(green, .5);
+      background-color: rgba($color-green, .5);
     }
     &.blue {
       background-color: rgba($color-blue, .5);
