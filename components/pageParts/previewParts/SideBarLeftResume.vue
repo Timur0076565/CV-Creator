@@ -67,12 +67,13 @@
 </template>
 
 <script lang="ts">
-import CVInfoBlock from "~/components/pageParts/cvFileParts/CVInfoBlock.vue";
-import SkillsList from "~/components/pageParts/cvFileParts/SkillsList.vue";
-import LinksList from "~/components/pageParts/cvFileParts/LinksList.vue";
-import DetailsList from "~/components/pageParts/cvFileParts/DetailsList.vue";
-import PersonData from "~/components/pageParts/cvFileParts/PersonData.vue";
-import MainInfoWrapper from "~/components/pageParts/cvFileParts/MainInfoWrapper.vue";
+import CVInfoBlock from "~/components/pageParts/previewParts/CVInfoBlock.vue";
+import SkillsList from "~/components/pageParts/previewParts/SkillsList.vue";
+import LinksList from "~/components/pageParts/previewParts/LinksList.vue";
+import DetailsList from "~/components/pageParts/previewParts/DetailsList.vue";
+import PersonData from "~/components/pageParts/previewParts/PersonData.vue";
+import MainInfoWrapper from "~/components/pageParts/previewParts/MainInfoWrapper.vue";
+import { COLORS } from "~/assets/consts/colors";
 
 export default {
   name: "CVFile",
@@ -94,15 +95,7 @@ export default {
       }
     },
     backgroundColor(): string {
-      const colors = {
-        red: 'red',
-        orange: 'orange',
-        yellow: 'yellow',
-        green: 'green',
-        blue: 'blue',
-      }
-
-      return colors[this.theme]
+      return COLORS[this.theme]
     }
   }
 }
@@ -114,8 +107,7 @@ export default {
 .cv-file {
   display: flex;
   overflow: hidden;
-  //height: 877px;
-  //max-width: 620px;
+  width: 100%;
   height: 842px;
   max-width: 600px;
   margin: 0 auto;
@@ -126,19 +118,28 @@ export default {
     flex-basis: 30%;
 
     &.red {
-      background-color: red;
+      background-color:  $color-red;
     }
     &.orange {
-      background-color: orange;
+      background-color:  $color-orange;
     }
     &.yellow {
-      background-color: yellow;
+      background-color:  $color-yellow;
     }
     &.green {
-      background-color: $color-green;
+      background-color:  $color-green;
     }
     &.blue {
-      background-color: $color-blue;
+      background-color:  $color-blue;
+    }
+    &.violet {
+      background-color:  $color-violet;
+    }
+    &.brown {
+      background-color:  $color-brown;
+    }
+    &.grey {
+      background-color: $color-dark-grey;
     }
   }
 
