@@ -108,7 +108,6 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 842px;
   max-width: 600px;
   margin: 0 auto;
 

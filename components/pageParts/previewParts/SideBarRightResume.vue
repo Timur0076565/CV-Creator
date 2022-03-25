@@ -107,7 +107,6 @@ export default {
 .cv-file {
   display: flex;
   width: 100%;
-  height: 842px;
   max-width: 600px;
   margin: 0 auto;
 

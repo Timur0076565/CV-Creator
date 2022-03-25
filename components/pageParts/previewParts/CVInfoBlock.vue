@@ -23,6 +23,8 @@ export default {
 <style lang="scss" scoped>
 
 .cv-info_block {
+  margin-bottom: 20px;
+
   .title {
     font-weight: bold;
   }
