@@ -12,7 +12,7 @@
           Profile
         </template>
 
-        <div class="profile">{{personData.profile}}</div>
+        <div class="profile" v-html="personData.profile"/>
       </MainInfoWrapper>
 
       <MainInfoWrapper v-if="personData.employmentHistory.length">
@@ -28,7 +28,9 @@
             {{ info(emp.jobTitle, emp.employer, emp.city) }}
           </template>
           <template #date>{{ emp.date }}</template>
-          <template #description>{{ emp.description }}</template>
+          <template #description>
+            <div v-html="emp.description"/>
+          </template>
         </CVInfoBlock>
       </MainInfoWrapper>
 
@@ -45,7 +47,9 @@
             {{ info(emp.degree, emp.school, emp.city) }}
           </template>
           <template #date>{{ emp.date }}</template>
-          <template #description>{{ emp.description }}</template>
+          <template #description>
+            <div v-html="emp.description"/>
+          </template>
         </CVInfoBlock>
       </MainInfoWrapper>
 
@@ -59,8 +63,10 @@
       />
 
       <SkillsList
+        class="skills"
         v-if="personData.skills.length"
         :skills="personData.skills"
+        :dark="true"
       />
     </div>
   </div>
@@ -146,6 +152,11 @@ export default {
     padding: 30px;
     background-color: $color-grey;
     height: 100%;
+
+    .skills {
+      max-width: 280px;
+    }
+
   }
 }
 

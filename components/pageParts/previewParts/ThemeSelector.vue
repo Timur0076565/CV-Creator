@@ -30,6 +30,7 @@ export default Vue.extend({
         THEMES_STAGES.SIDE_LEFT,
         THEMES_STAGES.SIDE_RIGHT,
         THEMES_STAGES.TOP,
+        THEMES_STAGES.DARK,
       ],
     }
   },
@@ -59,9 +60,9 @@ export default Vue.extend({
   }
 
   .themes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 </style>

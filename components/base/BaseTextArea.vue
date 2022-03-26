@@ -5,22 +5,32 @@
     </template>
 
     <template #field>
-      <textarea
-        class="base-text-area-field"
-        @input="onChange"
-        :placeholder="placeholder"
+      <quillEditor
+        class="quill-editor"
+        v-bind="$attrs"
+        v-on="$listeners"
+        :options="editorOption"
         :value="value"
-      />
+      >
+      </quillEditor>
     </template>
   </FieldWrapper>
 </template>
 
 <script>
-
+import 'quill/dist/quill.snow.css'
+import { quillEditor } from 'vue-quill-editor'
 import FieldWrapper from "~/components/base/FieldWrapper";
 export default {
   name: 'BaseTextArea',
-  components: {FieldWrapper},
+  components: {FieldWrapper, quillEditor},
+  data() {
+    return {
+      editorOption: {
+        theme: 'snow'
+      }
+    }
+  },
   props: {
     placeholder: {
       type: String,
@@ -43,10 +53,9 @@ export default {
 @import '../../assets/styles/app_variables';
 
 .base-text-area {
-  .base-text-area-field {
+  .quill-editor {
     height: auto;
     min-height: 150px;
-    padding: 16px;
     border: none;
     background: $color-grey;
     color: $main-color;

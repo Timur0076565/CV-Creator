@@ -16,7 +16,11 @@
         :src="imageUrl"
         alt=""
       >
-      <span> Upload image </span>
+      <span
+        v-if="image"
+        @click.stop="deleteImage"
+      > Delete image </span>
+      <span v-else> Upload image </span>
     </button>
   </div>
 </template>
@@ -30,7 +34,6 @@ export default {
   },
   data() {
     return {
-      selectedFile: null,
       acceptList: ['image/*'],
       image: ''
     };
@@ -53,7 +56,6 @@ export default {
   methods: {
     selectFile(event) {
       const [firstFile] = event.target.files;
-      this.selectedFile = firstFile;
       const reader = new FileReader();
       reader.addEventListener('load', this.imageLoaded);
       reader.readAsDataURL(firstFile);
@@ -62,6 +64,9 @@ export default {
       this.image = event.target.result;
       this.$emit('onChange', this.image);
     },
+    deleteImage() {
+      this.image = ''
+    }
   },
 };
 </script>

@@ -7,13 +7,14 @@
   />
 </template>
 
-<script>
+<script lang="ts">
 import {THEMES_STAGES} from "~/assets/consts/themeStages";
 
 const componentsMap = {
-  [THEMES_STAGES.SIDE_LEFT]: () => import('../../../components/pageParts/previewParts/SideBarLeftResume'),
-  [THEMES_STAGES.SIDE_RIGHT]: () => import('../../../components/pageParts/previewParts/SideBarRightResume'),
-  [THEMES_STAGES.TOP]: () => import('../../../components/pageParts/previewParts/TopBarResume'),
+  [THEMES_STAGES.SIDE_LEFT]: () => import('../../../components/pageParts/previewParts/SideBarLeftResume.vue'),
+  [THEMES_STAGES.SIDE_RIGHT]: () => import('../../../components/pageParts/previewParts/SideBarRightResume.vue'),
+  [THEMES_STAGES.TOP]: () => import('../../../components/pageParts/previewParts/TopBarResume.vue'),
+  [THEMES_STAGES.DARK]: () => import('../../../components/pageParts/previewParts/DarkResume.vue'),
 };
 
 export default {
@@ -33,13 +34,9 @@ export default {
     }
   },
   computed: {
-    activeStageComponent() {
+    activeStageComponent(): any {
       return componentsMap[this.activeStage];
     },
   }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -1,5 +1,8 @@
 <template>
-  <div class="person-data">
+  <div
+    class="person-data"
+    :class="{ dark }"
+  >
     <img
       class="avatar"
       :src="details.avatar"
@@ -19,6 +22,10 @@ export default {
     details: {
       type: Object,
       default: () => ({})
+    },
+    dark: {
+      type: Boolean,
+      default: false,
     }
   },
   computed: {
@@ -56,6 +63,30 @@ export default {
 
     &:before {
       content: '----------------';
+    }
+  }
+
+  &.dark {
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .avatar {
+      width: 110px;
+      height: 110px;
+    }
+
+    .title {
+      margin-left: 20px;
+      font-size: 40px;
+    }
+
+    .job {
+      flex-basis: 100%;
+      align-items: flex-start;
+
+      &:before {
+        content: '---------------------';
+      }
     }
   }
 }

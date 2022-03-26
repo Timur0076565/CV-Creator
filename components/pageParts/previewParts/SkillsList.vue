@@ -9,7 +9,11 @@
         :key="index"
       >
         <span>{{ skill.name }}</span>
-        <span class="level" :style="{ width: `${skill.level * 20}%` }"/>
+        <span
+          class="level"
+          :class="{ dark }"
+          :style="{ width: `${skill.level * 20}%` }"
+        />
       </li>
     </ul>
   </div>
@@ -22,6 +26,10 @@ export default {
     skills: {
       type: Array,
       default: () => []
+    },
+    dark: {
+      type: Boolean,
+      default: false,
     }
   }
 }
@@ -53,6 +61,10 @@ export default {
         background-color: $white;
         border-radius: 2px;
         margin-top: 3px;
+
+        &.dark {
+          background-color: $main-color;
+        }
       }
     }
   }

@@ -38,7 +38,7 @@ export default {
     list-style: none;
 
     a {
-      color: $white;
+      color: inherit;
     }
   }
 }

@@ -25,6 +25,7 @@ const componentsMap: any = {
   [THEMES_STAGES.SIDE_LEFT]: () => import('../../components/pageParts/previewParts/themes/SideBarLeftThem.vue'),
   [THEMES_STAGES.SIDE_RIGHT]: () => import('../../components/pageParts/previewParts/themes/SideBarRightThem.vue'),
   [THEMES_STAGES.TOP]: () => import('../../components/pageParts/previewParts/themes/TopBarTheme.vue'),
+  [THEMES_STAGES.DARK]: () => import('../../components/pageParts/previewParts/themes/DarkTheme.vue'),
 };
 
 
