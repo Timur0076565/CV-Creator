@@ -20,9 +20,10 @@
 </template>
 
 <script lang="ts">
-import FieldWrapper from "~/components/base/FieldWrapper";
+import Vue from "vue";
+import FieldWrapper from "~/components/base/FieldWrapper.vue";
 
-export default {
+export default Vue.extend({
   name: 'BaseInput',
   components: {FieldWrapper},
   model: {
@@ -40,10 +41,10 @@ export default {
     },
   },
   methods: {
-    onInput(event) {
+    onInput(event: any) {
       this.$emit('onChange', event.target.value);
     },
-    numericOnly(event) {
+    numericOnly(event: any) {
       if (this.type === 'number') {
         const charCode = event.which || event.keyCode;
         if (charCode < 46 || charCode > 57) {
@@ -54,7 +55,7 @@ export default {
       this.$emit('keypress', event);
     },
   },
-};
+})
 </script>
 
 <style lang="scss" scoped>

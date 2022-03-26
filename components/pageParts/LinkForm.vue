@@ -21,10 +21,11 @@
 </template>
 
 <script lang="ts">
-import BaseInput from "~/components/base/BaseInput";
+import Vue from "vue";
+import BaseInput from "~/components/base/BaseInput.vue";
 import {firstChartToUpperCase} from "~/helpers/helpers";
 
-export default {
+export default Vue.extend({
   name: "LinkForm",
   components: {BaseInput},
   props: {
@@ -38,7 +39,7 @@ export default {
       return firstChartToUpperCase(this.formData.name) || '(Link label)'
     },
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>

@@ -12,7 +12,9 @@
       v-if="showWarning && isInvalidForm"
       class="error"
     >
-      Personal details is required
+      <span v-if="!isDetailsCompleted">Personal details is required</span>
+      <span v-else-if="!isEmailCorrect">Email is incorrect</span>
+      <span v-else-if="!isPhoneCorrect">Phone number must be 12 characters</span>
     </div>
 
     <PersonalInfoParts v-model="personData.profile"/>
@@ -51,15 +53,11 @@ import SkillsPart from "~/components/pageParts/SkillsPart.vue";
 import LinksPart from "~/components/pageParts/LinksPart.vue";
 import LevelRadioButton from "~/components/base/LevelRadioButton.vue";
 
-declare module 'vue/types/vue' {
-  interface Vue {
-    selectedTheme: string,
-    themes: Array<string>,
-    personData: IPersonalData,
-    showWarning: boolean
-  }
+interface IData {
+  selectedTheme: string,
+  personData: IPersonalData,
+  showWarning: boolean
 }
-
 
 export default Vue.extend({
   name: 'IndexPage',
@@ -74,7 +72,7 @@ export default Vue.extend({
     PersonalInfoParts,
     PersonalDetailsPart
   },
-  data() {
+  data(): IData {
     return {
       selectedTheme: 'green',
       personData: {
@@ -96,11 +94,24 @@ export default Vue.extend({
     }
   },
   computed: {
+    isEmailCorrect(): boolean {
+      return this.testEmail(this.personData.details.email)
+    },
+    isPhoneCorrect(): boolean {
+      return this.personData.details.phone.length === 19;
+    },
+    isDetailsCompleted(): boolean {
+      return !['', null, undefined].some((nullified) => Object.values(this.personData.details).includes(nullified));
+    },
     isInvalidForm(): boolean {
-      return ['', null, undefined].some((nullified) => Object.values(this.personData.details).includes(nullified));
+      return [false].some((nullified) => Object.values({details: this.isDetailsCompleted, email: this.isEmailCorrect, phone: this.isPhoneCorrect}).includes(nullified));
     },
   },
   methods: {
+    testEmail(value: string): boolean {
+      const validationEmail = /^(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){255,})(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){65,}@)(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22))(?:\.(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22)))*@(?:(?:(?!.*[^.]{64,})(?:(?:(?:xn--)?[a-z0-9]+(?:-[a-z0-9]+)*\.){1,126}){1,}(?:(?:[a-z][a-z0-9]*)|(?:(?:xn--)[a-z0-9]+))(?:-[a-z0-9]+)*)|(?:\[(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){7})|(?:(?!(?:.*[a-f0-9][:\]]){7,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?)))|(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){5}:)|(?:(?!(?:.*[a-f0-9]:){5,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3}:)?)))?(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))(?:\.(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))){3}))\]))$/;
+      return validationEmail.test(value);
+    },
     addNewEducationPartForm() {
       const newForm: IEducation = {
         school: '',
@@ -134,7 +145,7 @@ export default Vue.extend({
     addSkill(skill: any) {
       this.personData.skills.push(skill)
     },
-    changeSkill(index: number, level: string) {
+    changeSkill(index: number, level: string): void {
       this.personData.skills[index].level = level
     },
     onSubmit() {

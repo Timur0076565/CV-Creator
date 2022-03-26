@@ -15,8 +15,9 @@
 import BaseInput from "~/components/base/BaseInput.vue";
 import LevelRadioButton from "~/components/base/LevelRadioButton.vue";
 import SkillLevel from "~/components/pageParts/SkillLevel.vue";
+import Vue from "vue";
 
-export default {
+export default Vue.extend({
   name: "SkillItem",
   components: {SkillLevel, LevelRadioButton, BaseInput},
   props: {
@@ -30,7 +31,7 @@ export default {
       this.$emit('onChangeLevel', level)
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

@@ -22,6 +22,8 @@
       <BaseInput
         class="base-input"
         v-model="formData[titlesList[2][0]]"
+        v-mask="config"
+        placeholder="12.12.2012 - 12.12.2022"
       >
         {{ titlesList[2][1] }}
       </BaseInput>
@@ -41,11 +43,18 @@
 </template>
 
 <script lang="ts">
-import BaseInput from "~/components/base/BaseInput";
-import BaseTextArea from "~/components/base/BaseTextArea";
+import Vue from "vue";
+import BaseInput from "~/components/base/BaseInput.vue";
+import BaseTextArea from "~/components/base/BaseTextArea.vue";
 import {firstChartToUpperCase} from "~/helpers/helpers";
 
-export default {
+type configType = {
+  mask: string
+  masked: boolean
+  prefill: boolean
+}
+
+export default Vue.extend({
   name: "DynamicForm",
   components: {BaseTextArea, BaseInput},
   props: {
@@ -64,9 +73,16 @@ export default {
     },
     titlesList(): any {
       return Object.entries(this.titles)
-    }
+    },
+    config(): configType {
+      return {
+        mask: '##.##.#### - ##.##.####',
+        masked: true,
+        prefill: true,
+      };
+    },
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>

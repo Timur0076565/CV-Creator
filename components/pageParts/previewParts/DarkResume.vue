@@ -78,6 +78,7 @@
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 import CVInfoBlock from "~/components/pageParts/previewParts/CVInfoBlock.vue";
 import SkillsList from "~/components/pageParts/previewParts/SkillsList.vue";
 import LinksList from "~/components/pageParts/previewParts/LinksList.vue";
@@ -86,7 +87,7 @@ import PersonData from "~/components/pageParts/previewParts/PersonData.vue";
 import MainInfoWrapper from "~/components/pageParts/previewParts/MainInfoWrapper.vue";
 import { COLORS } from "~/assets/consts/colors";
 
-export default {
+export default Vue.extend({
   name: "TopBarResume",
   components: {MainInfoWrapper, PersonData, DetailsList, LinksList, SkillsList, CVInfoBlock},
   props: {
@@ -109,7 +110,7 @@ export default {
       return COLORS[this.theme]
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>
@@ -153,6 +154,7 @@ export default {
   .wrapper {
     border: 1px solid $white;
     border-radius: 8px;
+    min-height: 840px;
 
     .details {
       padding: 20px;

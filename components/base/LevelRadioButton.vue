@@ -16,7 +16,9 @@
 </template>
 
 <script lang="ts">
-export default {
+import Vue from "vue";
+
+export default Vue.extend({
   name: "LevelRadioButton",
   model: {
     prop: 'modelValue',
@@ -38,7 +40,7 @@ export default {
       return this.modelValue === this.value;
     },
     currentColor(): string {
-      const colors = {
+      const colors: any = {
         '1': 'red',
         '2': 'orange',
         '3': 'yellow',
@@ -49,7 +51,7 @@ export default {
       return colors[this.modelValue]
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

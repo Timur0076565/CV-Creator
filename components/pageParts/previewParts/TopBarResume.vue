@@ -80,8 +80,9 @@ import DetailsList from "~/components/pageParts/previewParts/DetailsList.vue";
 import PersonData from "~/components/pageParts/previewParts/PersonData.vue";
 import MainInfoWrapper from "~/components/pageParts/previewParts/MainInfoWrapper.vue";
 import { COLORS } from "~/assets/consts/colors";
+import Vue from "vue";
 
-export default {
+export default Vue.extend({
   name: "TopBarResume",
   components: {MainInfoWrapper, PersonData, DetailsList, LinksList, SkillsList, CVInfoBlock},
   props: {
@@ -104,7 +105,7 @@ export default {
       return COLORS[this.theme]
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>
@@ -114,6 +115,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-height: 840px;
   max-width: 600px;
   margin: 0 auto;
 

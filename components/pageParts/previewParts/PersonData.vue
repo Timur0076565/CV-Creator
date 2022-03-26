@@ -15,8 +15,9 @@
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 
-export default {
+export default Vue.extend({
   name: "PersonData",
   props: {
     details: {
@@ -33,7 +34,7 @@ export default {
       return `${this.details.firstName}, ${this.details.lastName}`
     },
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

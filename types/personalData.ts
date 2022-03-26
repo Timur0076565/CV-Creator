@@ -30,7 +30,7 @@ export interface ILinks {
 
 export interface ISkills {
   name: string,
-  href: string
+  level: string
 }
 
 export default interface IPersonalData {

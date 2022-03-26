@@ -71,6 +71,7 @@
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 import CVInfoBlock from "~/components/pageParts/previewParts/CVInfoBlock.vue";
 import SkillsList from "~/components/pageParts/previewParts/SkillsList.vue";
 import LinksList from "~/components/pageParts/previewParts/LinksList.vue";
@@ -79,7 +80,7 @@ import PersonData from "~/components/pageParts/previewParts/PersonData.vue";
 import MainInfoWrapper from "~/components/pageParts/previewParts/MainInfoWrapper.vue";
 import { COLORS } from "~/assets/consts/colors";
 
-export default {
+export default Vue.extend({
   name: "SideBarRightResume",
   components: {MainInfoWrapper, PersonData, DetailsList, LinksList, SkillsList, CVInfoBlock},
   props: {
@@ -102,7 +103,7 @@ export default {
       return COLORS[this.theme]
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>
@@ -112,6 +113,7 @@ export default {
   display: flex;
   width: 100%;
   max-width: 600px;
+  min-height: 840px;
   margin: 0 auto;
 
   .details {

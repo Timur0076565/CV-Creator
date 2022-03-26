@@ -15,9 +15,11 @@
 </template>
 
 <script lang="ts">
-import AddButton from "~/components/base/AddButton";
+import Vue from "vue";
+import AddButton from "~/components/base/AddButton.vue";
 import LinkForm from "~/components/pageParts/LinkForm.vue";
-export default {
+
+export default Vue.extend({
   name: "LinksPart",
   components: {LinkForm, AddButton},
   props: {
@@ -31,7 +33,7 @@ export default {
       this.$emit('onAddNewForm')
     }
   }
-}
+})
 </script>
 
 <style scoped>

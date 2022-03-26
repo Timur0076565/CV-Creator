@@ -16,9 +16,10 @@
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 import {COLORS} from "~/assets/consts/colors";
 
-export default {
+export default Vue.extend({
   name: "ColorRadioButton",
   model: {
     prop: 'modelValue',
@@ -43,7 +44,7 @@ export default {
       return COLORS[this.value]
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

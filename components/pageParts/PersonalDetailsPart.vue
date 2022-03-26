@@ -21,11 +21,16 @@
     </div>
 
     <div class="inputs_wrapper">
-      <BaseInput class="base-input" v-model="formData.email">
+      <BaseInput class="base-input" v-model="formData.email" type="email">
         E-mail
       </BaseInput>
 
-      <BaseInput class="base-input" v-model="formData.phone">
+      <BaseInput
+        class="base-input"
+        v-model="formData.phone"
+        v-mask="config"
+        placeholder="+ 380 ("
+      >
         Phone
       </BaseInput>
     </div>
@@ -35,6 +40,13 @@
 <script lang="ts">
 import UploadFile from "~/components/base/UploadFile.vue";
 import BaseInput from "~/components/base/BaseInput.vue";
+
+
+type configType = {
+  mask: string
+  masked: boolean
+  prefill: boolean
+}
 
 export default {
   name: "PersonalDetailsPart",
@@ -48,6 +60,15 @@ export default {
       type: Boolean,
       default: false,
     }
+  },
+  computed: {
+    config(): configType {
+      return {
+        mask: '+380 (##) ###-##-##',
+        masked: true,
+        prefill: true,
+      };
+    },
   },
 }
 </script>

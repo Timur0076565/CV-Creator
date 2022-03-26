@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-
+import Vue from "vue";
 import {THEMES_STAGES} from "~/assets/consts/themeStages";
 
 const componentsMap: any = {
@@ -29,7 +29,7 @@ const componentsMap: any = {
 };
 
 
-export default {
+export default Vue.extend({
   name: "ThemeRadioButton",
   model: {
     prop: 'modelValue',
@@ -54,7 +54,7 @@ export default {
       return componentsMap[this.value];
     },
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

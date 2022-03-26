@@ -9,6 +9,7 @@
 
 <script lang="ts">
 import {THEMES_STAGES} from "~/assets/consts/themeStages";
+import Vue from "vue";
 
 const componentsMap = {
   [THEMES_STAGES.SIDE_LEFT]: () => import('../../../components/pageParts/previewParts/SideBarLeftResume.vue'),
@@ -17,7 +18,7 @@ const componentsMap = {
   [THEMES_STAGES.DARK]: () => import('../../../components/pageParts/previewParts/DarkResume.vue'),
 };
 
-export default {
+export default Vue.extend({
   name: "CVComponent",
   props: {
     personData: {
@@ -38,5 +39,5 @@ export default {
       return componentsMap[this.activeStage];
     },
   }
-}
+})
 </script>
