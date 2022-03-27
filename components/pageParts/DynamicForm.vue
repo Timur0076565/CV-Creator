@@ -113,5 +113,22 @@ export default Vue.extend({
     }
   }
 }
+
+@media (max-width: $sm) {
+  .employment-history-form {
+    .inputs_wrapper {
+      flex-direction: column;
+      margin-bottom: 0;
+
+      .base-input {
+        margin-bottom: 15px;
+
+        &:first-of-type {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
 </style>
 

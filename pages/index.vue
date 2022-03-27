@@ -150,13 +150,18 @@ export default Vue.extend({
     },
     onSubmit() {
       if (this.isInvalidForm) {
-        this.showWarning = true
+        this.showWarning = true;
+        this.smoothScrollToTop()
         return
       }
 
       localStorage.setItem('form-data', JSON.stringify(this.personData))
 
       this.$router.push({name: 'preview'})
+    },
+    smoothScrollToTop() {
+      const top: number = 0;
+      window.scrollTo({ top, behavior: 'smooth' });
     },
   }
 })

@@ -70,4 +70,13 @@ export default Vue.extend({
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+@media (max-width: $x-sm) {
+  .color-selector {
+    .colors {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
 </style>

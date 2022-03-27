@@ -55,51 +55,51 @@ export default Vue.extend({
       skillsVariants: [
         {
           name: 'JavaScript',
-          level: '1',
+          level: '5',
         },
         {
           name: 'TypeScript',
-          level: '1',
+          level: '5',
         },
         {
           name: 'Vue',
-          level: '1',
+          level: '5',
         },
         {
           name: 'Nuxt',
-          level: '1',
+          level: '5',
         },
         {
           name: 'React',
-          level: '1',
+          level: '5',
         },
         {
           name: 'Redux',
-          level: '1',
+          level: '5',
         },
         {
           name: 'Git',
-          level: '1',
+          level: '5',
         },
         {
           name: 'Node',
-          level: '1',
+          level: '5',
         },
         {
           name: 'HTML',
-          level: '1',
+          level: '5',
         },
         {
           name: 'CSS',
-          level: '1',
+          level: '5',
         },
         {
           name: 'SASS',
-          level: '1',
+          level: '5',
         },
         {
           name: 'LESS',
-          level: '1',
+          level: '5',
         }
       ],
     }

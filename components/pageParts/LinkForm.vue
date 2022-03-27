@@ -1,5 +1,5 @@
 <template>
-  <div class="employment-history-form">
+  <div class="link-form">
     <h2>{{ title }}</h2>
 
     <div class="inputs_wrapper">
@@ -13,6 +13,9 @@
       <BaseInput
         class="base-input"
         v-model="formData.href"
+        type="url"
+        pattern="https://.*"
+        placeholder="https://example.com"
       >
         Link
       </BaseInput>
@@ -45,7 +48,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import '../../assets/styles/app_variables';
 
-.employment-history-form {
+.link-form {
   border: 1px solid rgba($grey-main, .2);
   padding: 0 20px 20px;
   border-radius: 8px;
@@ -66,6 +69,21 @@ export default Vue.extend({
     .base-input {
       &:first-of-type {
         margin-right: 30px;
+      }
+    }
+  }
+}
+
+@media (max-width: $sm) {
+  .link-form {
+    .inputs_wrapper {
+      flex-direction: column;
+
+      .base-input {
+        &:first-of-type {
+          margin-right: 0;
+          margin-bottom: 15px;
+        }
       }
     }
   }

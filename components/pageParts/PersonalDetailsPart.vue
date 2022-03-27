@@ -74,6 +74,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../assets/styles/app_variables';
 
 .personal-details-part {
   margin-bottom: 30px;
@@ -112,6 +113,24 @@ export default {
     .base-input {
       &:first-of-type {
         margin-right: 30px;
+      }
+    }
+  }
+}
+
+@media (max-width: $sm) {
+  .personal-details-part {
+    .inputs_wrapper {
+      flex-direction: column;
+      margin-bottom: 0;
+
+      .base-input,
+      .upload-file {
+        margin: 0 0 15px 0;
+
+        &:first-of-type {
+          margin-right: 0;
+        }
       }
     }
   }

@@ -55,4 +55,14 @@ export default Vue.extend({
   }
 }
 
+@media (max-width: $sm) {
+  .skill-item {
+    flex-direction: column;
+
+    .base-input {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+  }
+}
 </style>

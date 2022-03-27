@@ -3,18 +3,30 @@
     <div class="wrapper">
       <div class="themes">
         <ColorSelector
+          class="color-selector"
           v-model="selectedTheme"
           :selectedColor="selectedTheme"
         />
 
         <ThemeSelector
+          class="theme-selector"
           v-model="selectedView"
           :activeStage="selectedView"
         />
       </div>
 
       <CVComponent
-        class="cv-file"
+        class="cv-file-preview"
+        :personData="personData"
+        :theme="selectedTheme"
+        :activeStage="selectedView"
+      ></CVComponent>
+
+      <BasePreloader v-if="showWhenExport"/>
+
+      <CVComponent
+        v-show="showWhenExport"
+        class="cv-file-export"
         :personData="personData"
         :theme="selectedTheme"
         :activeStage="selectedView"
@@ -44,10 +56,18 @@ import ColorSelector from "~/components/pageParts/previewParts/ColorSelector.vue
 import CVComponent from "~/components/pageParts/previewParts/CVComponent.vue";
 import ThemeSelector from "~/components/pageParts/previewParts/ThemeSelector.vue";
 import {THEMES_STAGES} from "~/assets/consts/themeStages";
+import BasePreloader from "~/components/base/BasePreloader.vue";
+
+interface IData {
+  selectedTheme: string,
+  selectedView: any,
+  showWhenExport: boolean,
+}
 
 export default Vue.extend({
   name: "preview",
   components: {
+    BasePreloader,
     ThemeSelector,
     CVComponent,
     ColorSelector,
@@ -55,10 +75,11 @@ export default Vue.extend({
     BaseButton,
     SideBarLeftResume
   },
-  data() {
+  data(): IData {
     return {
       selectedTheme: 'green',
       selectedView: THEMES_STAGES.SIDE_LEFT,
+      showWhenExport: false,
     }
   },
   computed: {
@@ -67,16 +88,20 @@ export default Vue.extend({
     }
   },
   methods: {
-    exportPDF() {
+    async exportPDF() {
       const doc = new jsPDF('p', 'pt', 'A4');
-      const source: any = window.document.querySelector('.cv-file')
+      const source: any = window.document.querySelector('.cv-file-export')
       const { details } = this.personData
 
-      doc.html(source, {
+      this.showWhenExport = true
+
+      await doc.html(source, {
         callback: function (doc) {
           doc.save(`${details.firstName} ${details.lastName}.pdf`);
         }
-      });
+      })
+
+      this.showWhenExport = false
     },
     createNewCV() {
       localStorage.removeItem('form-data')
@@ -93,8 +118,17 @@ export default Vue.extend({
   padding: 0 20px;
   width: 100%;
 
+  .cv-file-export {
+    width: 600px;
+    height: 840px;
+    position: absolute;
+    visibility: hidden;
+  }
+
   .wrapper {
     display: flex;
+    overflow: hidden;
+    position: relative;
 
     .themes {
       position: absolute;
@@ -126,6 +160,17 @@ export default Vue.extend({
       .themes {
         position: static;
         margin-bottom: 20px;
+        display: flex;
+      }
+    }
+  }
+}
+
+@media (max-width: $sm) {
+  .preview {
+    .wrapper {
+      .themes {
+        justify-content: space-between;
       }
     }
   }
